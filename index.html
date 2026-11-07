@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090b12">
+<title>KATHAN RECAP AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#090b12;color:#f5f5f7;font-family:Arial,sans-serif;min-height:100vh}
+header{padding:20px 18px;border-bottom:1px solid #252838;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:21px;font-weight:bold;letter-spacing:1px}
+.logo span{color:#a78bfa}
+.tag{font-size:11px;color:#a78bfa;border:1px solid #59418b;padding:6px 10px;border-radius:20px}
+main{max-width:850px;margin:auto;padding:25px 16px}
+h1{font-size:27px;margin-bottom:9px}
+.sub{color:#9296a8;font-size:14px;line-height:1.6;margin-bottom:25px}
+.card{background:#131622;border:1px solid #292d40;border-radius:16px;padding:19px;margin-bottom:18px}
+.card h2{font-size:17px;margin-bottom:15px}
+.upload{border:2px dashed #555078;border-radius:13px;padding:30px 12px;text-align:center;cursor:pointer;background:#171827}
+.upload .symbol{font-size:38px;margin-bottom:12px}
+.upload p{color:#aaaec0;font-size:13px;margin-top:8px}
+input[type=file]{display:none}
+button,select{background:#202438;color:white;border:1px solid #393e55;border-radius:9px;padding:12px;font-size:14px}
+button{cursor:pointer}
+.primary{background:#7955d9;border:0;width:100%;font-weight:bold;padding:15px;margin-top:15px}
+.primary:disabled{opacity:.4}
+video{width:100%;max-height:300px;margin-top:15px;border-radius:10px;background:#000}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.settings label{font-size:12px;color:#aaaec0}
+.settings select{width:100%;margin-top:8px}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.step{background:#1b1f2e;border-radius:10px;padding:13px;font-size:13px;color:#d2d3df}
+.num{color:#a78bfa;font-weight:bold;margin-right:7px}
+.note{font-size:12px;color:#888da0;line-height:1.7;margin-top:12px}
+footer{text-align:center;color:#777b8c;padding:25px;font-size:12px}
+@media(min-width:650px){main{padding:40px 25px}.steps{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">KATHAN <span>RECAP AI</span></div>
+ <div class="tag">AI RECAP STUDIO</div>
+</header>
+
+<main>
+ <h1>Movie Recap Studio 🎬</h1>
+ <p class="sub">Upload your video and create Myanmar language recap videos with AI.</p>
+
+ <section class="card">
+  <h2>01. Upload Video</h2>
+  <label class="upload" for="videoFile">
+   <div class="symbol">📁</div>
+   <strong id="uploadText">Choose Your Video</strong>
+   <p>MP4, MOV, MKV · Select a video from your phone</p>
+  </label>
+  <input id="videoFile" type="file" accept="video/*">
+  <video id="preview" controls hidden></video>
+  <p class="note" id="fileInfo">No video selected</p>
+ </section>
+
+ <section class="card">
+  <h2>02. Video Settings</h2>
+  <div class="settings">
+   <label>Video Ratio
+    <select id="ratio">
+     <option>9:16</option>
+     <option>16:9</option>
+     <option>1:1</option>
+     <option>3:4</option>
+    </select>
+   </label>
+   <label>Resolution
+    <select id="resolution">
+     <option>720p</option>
+     <option>1080p</option>
+    </select>
+   </label>
+   <label>Myanmar Voice
+    <select id="voice">
+     <option>သီဟ</option>
+     <option>နီလာ</option>
+     <option>Both</option>
+    </select>
+   </label>
+   <label>Recap Style
+    <select id="style">
+     <option>Natural</option>
+     <option>Dramatic</option>
+     <option>Fast Recap</option>
+    </select>
+   </label>
+  </div>
+  <button class="primary" id="start" disabled>START AI RECAP</button>
+  <p class="note">This first version supports video selection and preview. AI processing will be connected in the next development stages.</p>
+ </section>
+
+ <section class="card">
+  <h2>03. Processing Workflow</h2>
+  <div class="steps">
+   <div class="step"><span class="num">01</span>Extract Audio</div>
+   <div class="step"><span class="num">02</span>Transcribe</div>
+   <div class="step"><span class="num">03</span>Translate Myanmar</div>
+   <div class="step"><span class="num">04</span>AI Voice</div>
+   <div class="step"><span class="num">05</span>Timeline + Captions</div>
+   <div class="step"><span class="num">06</span>Render Video</div>
+  </div>
+ </section>
+</main>
+
+<footer>© 2026 KATHAN RECAP AI · Myanmar AI Recap Studio</footer>
+
+<script>
+const fileInput=document.getElementById('videoFile');
+const preview=document.getElementById('preview');
+const start=document.getElementById('start');
+fileInput.addEventListener('change',()=>{
+ const file=fileInput.files[0];
+ if(!file)return;
+ preview.src=URL.createObjectURL(file);
+ preview.hidden=false;
+ start.disabled=false;
+ document.getElementById('uploadText').textContent=file.name;
+ document.getElementById('fileInfo').textContent=
+ file.name+' · '+(file.size/1024/1024).toFixed(1)+' MB';
+});
+start.addEventListener('click',()=>{
+ alert('Video Preview အောင်မြင်ပါပြီ။ AI Processing Backend ကို နောက်အဆင့်မှာ ချိတ်ဆက်ပါမယ်။');
+});
+</script>
+</body>
+</html>
